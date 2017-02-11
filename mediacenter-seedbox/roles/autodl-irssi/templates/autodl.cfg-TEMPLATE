@@ -1,0 +1,321 @@
+[options]
+gui-server-port = {{ autodl_port }}
+gui-server-password = {{ autodl_pwd }}
+upload-type = rtorrent
+upload-watch-dir = ~/.autodl
+rt-dir = {{ def_downloads_dir }}
+rt-label = Music
+
+[webui]
+
+[ftp]
+
+[irc]
+
+[tracker 32P]
+enabled = false
+
+[tracker acehd]
+enabled = false
+
+[tracker ace]
+enabled = false
+
+[tracker al]
+enabled = false
+
+[tracker ahd]
+enabled = false
+
+[tracker bb]
+enabled = false
+
+[tracker bh5]
+enabled = false
+
+[tracker bhd]
+enabled = false
+
+[tracker bithdtv]
+enabled = false
+
+[tracker bhu]
+enabled = false
+
+[tracker bl]
+enabled = false
+
+[tracker bcg]
+enabled = false
+
+[tracker bs]
+enabled = false
+
+[tracker btn]
+enabled = false
+
+[tracker ct]
+enabled = false
+
+[tracker CB]
+enabled = false
+
+[tracker db]
+enabled = false
+
+[tracker decibelios]
+enabled = false
+
+[tracker db9]
+enabled = false
+
+[tracker deli.sh]
+enabled = false
+
+[tracker dh]
+enabled = false
+
+[tracker dks]
+enabled = false
+
+[tracker emp]
+enabled = false
+
+[tracker extremebits]
+enabled = false
+
+[tracker fano]
+enabled = false
+
+[tracker flr]
+enabled = false
+
+[tracker fsc]
+enabled = false
+
+[tracker ftn]
+enabled = false
+
+[tracker ff]
+enabled = false
+
+[tracker gg]
+enabled = false
+
+[tracker gft]
+enabled = false
+
+[tracker gks]
+enabled = false
+
+[tracker goem]
+enabled = false
+
+[tracker hdbr]
+enabled = false
+
+[tracker hdts]
+enabled = false
+
+[tracker hdl]
+enabled = false
+
+[tracker hda]
+enabled = false
+
+[tracker hdc]
+enabled = false
+
+[tracker hdme]
+enabled = false
+
+[tracker hb]
+enabled = false
+
+[tracker hd]
+enabled = false
+
+[tracker is]
+enabled = false
+
+[tracker inperil]
+enabled = false
+
+[tracker iplay]
+enabled = false
+
+[tracker kg]
+enabled = false
+
+[tracker Kb]
+enabled = false
+
+[tracker mactorrents]
+enabled = false
+
+[tracker morethan.tv]
+enabled = false
+
+[tracker mu]
+enabled = false
+
+[tracker mam]
+enabled = false
+
+[tracker nc]
+enabled = false
+
+[tracker ng]
+enabled = false
+
+[tracker norbits]
+enabled = false
+
+[tracker ptp]
+enabled = false
+
+[tracker ps]
+enabled = false
+
+[tracker phd]
+enabled = false
+
+[tracker polsou]
+enabled = false
+
+[tracker pt]
+enabled = false
+
+[tracker ptm]
+enabled = false
+
+[tracker psyt]
+enabled = false
+
+[tracker ptf]
+enabled = false
+
+[tracker ptn]
+enabled = false
+
+[tracker pussy]
+enabled = false
+
+[tracker RM]
+enabled = false
+
+[tracker rtt]
+enabled = false
+
+[tracker scc]
+enabled = false
+
+[tracker scb]
+enabled = false
+
+[tracker sfz]
+enabled = false
+
+[tracker schd]
+enabled = false
+
+[tracker scihd]
+enabled = false
+
+[tracker sdb]
+enabled = false
+
+[tracker st]
+enabled = false
+
+[tracker ssc]
+enabled = false
+
+[tracker StarBits]
+enabled = false
+
+[tracker stp]
+enabled = false
+
+[tracker swarm]
+enabled = false
+
+[tracker tbn]
+enabled = false
+
+[tracker teh]
+enabled = false
+
+[tracker tds]
+enabled = false
+
+[tracker tc]
+enabled = false
+
+[tracker tdc]
+enabled = false
+
+[tracker think]
+enabled = false
+
+[tracker tsh]
+enabled = false
+
+[tracker tby]
+enabled = false
+
+[tracker ttech]
+enabled = false
+
+[tracker tg]
+enabled = false
+
+[tracker tv]
+enabled = false
+
+[tracker ToTV]
+enabled = false
+
+[tracker tt]
+enabled = false
+
+[tracker ttn]
+enabled = false
+
+[tracker tti]
+enabled = false
+
+[tracker ttx]
+enabled = false
+
+[tracker tvt.ro]
+enabled = false
+
+[tracker ukn]
+enabled = false
+
+[tracker waffles]
+enabled = false
+
+[tracker what]
+enabled = false
+
+[tracker x264]
+enabled = false
+
+[tracker xs]
+enabled = false
+
+[tracker td]
+enabled = false
+
+[tracker tl]
+enabled = false
+
+[tracker ar]
+enabled = false
+
+
+[tracker bmtv]
+enabled = false
+

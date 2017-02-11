@@ -1,0 +1,51 @@
+---
+
+# Ansible playbook that installs a seedbox media server network controlled by
+# A master ldap server also running znc irc bouncer and cups print server hosting
+# files via nfs.
+#
+# The playbook does work and should with minor tweaking be able to set up a working
+# seedbox media server network for you but it is not doing it well with static
+# nfs mounts and other poor configuration
+#
+# Usage:
+# - Rename ./mediacenter-seedbox/roles/autodl-irssi/templates/autodl.cfg-TEMPLATE to autodl.cfg
+# - rename ./group_vars all-TEMPLATE to all and fill with with personalized info
+#
+# add to inventory:
+# - seedbox 
+# - media-server 
+# - master-server
+#
+# if 
+
+- name: basic setup for all hosts
+  hosts: all
+  remote_user: root
+  roles:
+    - basic-setup
+
+- name: Install rTorrent, php, apache ruTorrent
+  hosts: seedbox
+  remote_user: root
+  roles:
+    - nfs
+    - rtorrent 
+    - rutorrent
+    - autodl-irssi
+    - openvpn
+    
+- name: Install plex-media-server
+  hosts: media-server
+  remote_user: root
+  roles:
+    - plex
+
+
+
+
+
+
+
+    
+    

@@ -1,0 +1,41 @@
+---
+
+- name: install nfs-kernel-server
+  apt:
+    name: nfs-kernel-server
+
+- name: Create movies dir
+  file:
+    path=/export/storage/movies state=directory \
+    owner={{ admin_uname }} group={{ admin_uname }} mode=775 recurse=yes
+- name: create tv-shows dir
+  file:
+    path=/export/storage/tv-shows state=directory \
+    owner={{ admin_uname }} group={{ admin_uname }} mode=775 recurse=yes
+- name: create music dir
+  file:
+    path=/export/storage/music state=directory \
+    owner={{ admin_uname }} group={{ admin_uname }} mode=775 recurse=yes
+- name: create ebooks dir
+  file:
+    path=/export/storage/ebooks state=directory \
+    owner={{ admin_uname }} group={{ admin_uname }} mode=775 recurse=yes
+- name: create documents dir
+  file:
+    path=/export/storage/documents state=directory \
+    owner={{ admin_uname }} group={{ admin_uname }} mode=775 recurse=yes
+- name: create pictures dir
+  file:
+    path=/export/storage/pictures state=directory \
+    owner={{ admin_uname }} group={{ admin_uname }} mode=775 recurse=yes
+- name: create etc dir
+  file:
+    path=/export/storage/etc state=directory \
+    owner={{ admin_uname }} group={{ admin_uname }} mode=775 recurse=yes
+
+- name: add export to /etc/exports
+  lineinfile:
+    dest: /etc/exports
+    line: '/export/storage {{ network_prefix }}(rw,fsid=0,insecure,no_subtree_check,async)'
+  notify:
+    - exportfs

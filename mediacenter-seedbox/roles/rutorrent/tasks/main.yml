@@ -1,0 +1,45 @@
+---
+- name: install apache and php7
+  action: apt pkg={{ item }} state=installed
+  with_items:
+    - php
+    - php7.0-cli
+    - php7.0-json
+    - php7.0-curl
+    - php7.0-cgi
+    - php7.0-mbstring
+    - libapache2-mod-php
+    - libapache2-mod-scgi
+    - apache2
+  notify:
+    - restart apache2
+    
+- name: Install plugin dependencies
+  action: apt pkg={{ item }} state=installed
+  with_items:
+    - unrar
+    - unzip
+    - ffmpeg
+    - mediainfo
+    - git
+
+- name: Check if rutorrent is already installed
+  stat:
+    path: /var/www/html/ruTorrent
+  register: stat_rutorrent
+  
+- name: Clone rutorrent from git
+  git:
+    repo: https://github.com/Novik/ruTorrent.git
+    dest: /var/www/html/ruTorrent
+    force: yes
+  when: stat_rutorrent.stat.exists == false
+    
+- name: set permissions
+  file:
+    path: /var/www/html/ruTorrent
+    state: directory
+    owner: "{{ admin_uname }}"
+    group: www-data
+    mode: 0770
+    recurse: yes

@@ -1,0 +1,52 @@
+# Maximum and minimum number of peers to connect to per torrent.
+min_peers = 40
+max_peers = 200
+
+# Same as above but for seeding completed torrents (-1 = same as downloading)
+min_peers_seed = 10
+max_peers_seed = 200
+
+# Maximum number of simultanious uploads per torrent.
+max_uploads = 1480
+
+# Global upload and download rate in KiB. ”0” for unlimited.
+download_rate = 11162
+upload_rate = 7100
+
+# Default directory to save the downloaded torrents.
+directory = {{ def_downloads_dir }}
+
+# Default session directory.
+session = ~/.rtorrent/session
+
+# Watch a directory for new torrents, and stop those that have been deleted.
+
+schedule = watch_directory,5,5,load=~/.rtorrent/torrents/*.torrent
+#schedule = untied_directory,5,5,stop_untied=
+#schedule = watch_directory,5,5,load_start=/storage/downloads/rtorrent/watch/*.torrent
+
+# Close torrents when diskspace is low.
+schedule = low_diskspace,5,60,close_low_diskspace=100M
+
+# Port range to use for listening.
+port_range = {{ rtorrent_port_range }}
+
+# Start opening ports at a random position within the port range.
+#port_random = yes
+
+# Set whetever the client should try to connect to UDP trackers.
+use_udp_trackers = yes
+
+# Encryption options, set to none (default) or any combination of the following:
+# allow_incoming, try_outgoing, require, require_RC4, enable_retry, prefer_plaintext
+#
+# The example value allows incoming encrypted connections, starts unencrypted
+# outgoing connections but retries with encryption if they fail, preferring
+# plaintext to RC4 encryption after the encrypted handshake
+#
+encryption = allow_incoming,try_outgoing,enable_retry
+
+dht = disable
+
+scgi_port = localhost:5000
+

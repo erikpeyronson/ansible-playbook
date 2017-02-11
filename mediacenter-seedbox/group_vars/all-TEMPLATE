@@ -1,0 +1,19 @@
+# To avoid running unessecary services as root use this user (this user is not created and has to exist)
+admin_uname: admin
+
+# To restrict some services to local access supply subnet prefix
+network_prefix: 192.168.0.0/24
+
+# ports
+cups_port: 631
+
+
+
+# autodl
+autodl_port: 40000
+autodl_pwd: supersecurepassword
+
+# rtorrent
+rtorrent_port_range: 65488-65488
+def_downloads_dir: ~/Downloads
+

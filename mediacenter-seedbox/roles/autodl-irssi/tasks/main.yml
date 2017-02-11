@@ -1,0 +1,83 @@
+---
+# - include: roles/common/handlers/main.yml
+
+- name: Installing dependencies
+  action: apt name={{ item }} state=installed
+  with_items:
+    - irssi
+    - php-xml
+    - libarchive-zip-perl
+    - libnet-ssleay-perl
+    - libnet-ssleay-perl
+    - libhtml-html5-entities-perl # CHECK THIS LATER
+    - libxml-libxml-perl
+    - libdigest-sha-perl
+    - libjson-perl
+    - unzip
+- name: Check if .irssi dir is already created
+  stat:
+    path: /home/{{ admin_uname }}/.irssi/scripts/autorun
+  register: stat_irssidir
+   
+- name: Create .irssi/ dir
+  file:  
+    path: /home/{{ admin_uname}}/.irssi/scripts/autorun
+    state: directory
+    owner: "{{ admin_uname }}"
+    group: "{{ admin_uname }}"
+    mode: 0744
+    recurse: yes
+  when: stat_irssidir.stat.exists == false
+
+- name: Configuring irssi
+  remote_user: "{{ admin_uname }}"
+  template:
+    src: irssi.config
+    dest: /home/{{ admin_uname }}/.irssi/config
+      
+- name: Adding irssi systemd service
+  template:
+    src: irssi.service
+    dest: /etc/systemd/user/irssi.service
+  notify:
+    - reload systemd
+    - start irssi
+    - enable irssi
+
+- name: Copying autodl irssi installation script
+  remote_user: "{{ admin_uname }}"
+  template:
+    src: install-autodl.sh
+    dest: /home/{{ admin_uname }}/.irssi/scripts/install-autodl.sh
+    mode: 0765
+    force: no
+
+- name: Check if autodl irssi is alreaddy installed
+  stat:
+    path: /home/{{ admin_uname }}/.irssi/scripts/installation-sucessful
+  register: stat_autodl
+
+- name: Installing autodl-irssi # ADD FILE TO NOT RUN SCRIPT, CHECK CURL OUTPUT
+  shell: /home/{{ admin_uname }}/.irssi/scripts/install-autodl.sh
+  args:
+    chdir: /home/{{ admin_uname }}/.irssi/scripts/
+  when: stat_autodl.stat.exists == false
+  notify:
+    - create .autodl dir
+    - configure autodl irssi
+
+- name: Check if autodl rutorrent plugin is already installed
+  stat:
+    path: /var/www/html/ruTorrent/plugins/autodl-irssi
+  register: stat_plugin
+
+- name: Clone rutorrent plugin from github
+  git:
+    repo: https://github.com/autodl-community/autodl-rutorrent.git
+    dest: /var/www/html/ruTorrent/plugins/autodl-irssi
+    force: yes
+  when: stat_plugin.stat.exists == false
+  notify:
+    - configure rutorrent plugin
+    - set rutorrentplugin permissions
+

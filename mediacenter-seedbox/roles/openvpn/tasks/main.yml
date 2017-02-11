@@ -1,0 +1,12 @@
+---
+- name: install ovpn
+  apt:
+    name: openvpn
+  notify:
+   - template ovpn.conf
+   - template ovpn-tls.key
+   - template ovpn-ca.crt
+   - template ovpn credentials
+   - start openvpn
+   
+

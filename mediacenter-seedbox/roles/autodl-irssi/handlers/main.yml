@@ -1,0 +1,40 @@
+---
+- name: reload systemd
+  command: systemctl daemon-reload
+
+# systemd module has no support for --user, using command instead
+
+- name: start irssi
+  remote_user: "{{ admin_uname }}"
+  command: systemctl --user start irssi.service
+
+- name: enable irssi
+  remote_user: "{{ admin_uname }}"
+  command: systemctl --user enable irssi.service
+
+- name: configure rutorrent plugin
+  template:
+    src: conf.php
+    dest: /var/www/html/ruTorrent/plugins/autodl-irssi/conf.php
+
+- name: create .autodl dir
+  remote_user: "{{ admin_uname }}"
+  file:
+    path: /home/{{ admin_uname }}/.autodl/
+    state: directory
+    recurse: yes
+    
+- name: configure autodl irssi
+  remote_user: "{{ admin_uname }}"
+  template:
+    src: autodl.cfg
+    dest: /home/{{ admin_uname }}/.autodl/autodl.cfg
+
+- name: set rutorrentplugin permissions
+  file:
+    path: /var/www/html/ruTorrent/plugins/
+    state: directory
+    owner: "{{ admin_uname }}"
+    group: www-data
+    mode: 0770
+    recurse: yes

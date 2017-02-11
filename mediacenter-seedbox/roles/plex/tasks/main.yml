@@ -1,0 +1,33 @@
+---
+- name: install nfs-common
+  apt:
+    name: nfs-common
+
+- name: create mountpoint
+  file:
+    path: /nfs
+    owner: "{{ admin_uname }}"
+    group: "{{ admin_uname }}"
+    state: directory
+
+- name: add mount to /etc/fstab
+  lineinfile:
+    dest: /etc/fstab
+    line: '192.168.0.201:/export/storage /nfs nfs auto,rsize=8192,wsize=8192,timeo=14,intr,user'
+
+- name: Add Plex Media Server repository
+  apt_repository:
+    repo: deb https://downloads.plex.tv/repo/deb/ public main
+    state: present
+
+- name: Add key to Plex Media Server repository
+  apt_key:
+    url: "https://downloads.plex.tv/plex-keys/PlexSign.key"
+    state: present
+
+- name: install Plex Media Server
+  apt:
+    name: plexmediaserver
+    update_cache: yes
+    
+  

@@ -1,0 +1,30 @@
+---
+- name: create ~/tmp
+  file:
+    path: /home/root/tmp
+    state: directory
+
+- name: template ovpn.conf
+  template:
+    src: ovpn.conf
+    dest: /etc/openvpn/ovpn.conf
+
+- name: template ovpn-tls.key
+  template:
+    src: ovpn-tls.key
+    dest: /etc/openvpn/ovpn-tls.key 
+
+- name: template ovpn-ca.crt
+  template:
+    src: ovpn-ca.crt 
+    dest: /etc/openvpn/ovpn-ca.crt
+    
+- name: template ovpn credentials
+  template:
+    src: credentials
+    dest: /etc/openvpn/credentials
+
+- name: start openvpn
+  command: openvpn --config /etc/openvpn/ovpn.conf --daemon
+
+  

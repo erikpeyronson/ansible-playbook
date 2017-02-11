@@ -1,0 +1,14 @@
+---
+- name: reload systemd
+  command: systemctl daemon-reload
+
+# systemd module has no support for --user, using command instead
+- name: start rt.service
+  remote_user: "{{ admin_uname }}"
+  command: systemctl --user start rt.service
+
+- name: enable rt.service
+  remote_user: "{{ admin_uname }}"
+  command: systemctl --user enable rt.service
+
+  

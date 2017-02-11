@@ -1,0 +1,56 @@
+---
+- name: install rtorrent
+  apt:
+    name: rtorrent
+    
+
+- name: Check if session dir is already created
+  stat:
+    path: /var/www/html/ruTorrent
+  register: stat_session
+
+- name: Create session folder
+  file:
+    path: /home/{{ admin_uname }}/.rtorrent/session
+    state: directory 
+    owner: "{{ admin_uname }}"
+    group: www-data 
+    mode: 0755
+    recurse: yes
+  when: stat_session.stat.exists == false
+    
+- name: Create torrents folder
+  file:
+    path: /home/{{ admin_uname }}/.rtorrent/torrents
+    state: directory 
+    owner: "{{ admin_uname }}"
+    group: www-data
+    mode: 0755
+    recurse: yes
+       
+- name: Create default downloads folder
+  file:
+    path: /export/storage/downloads
+    state: directory
+    owner: "{{ admin_uname }}"
+    group: users
+    mode: 0775
+    recurse: yes
+
+- name: Configure rtorrent
+  remote_user: "{{ admin_uname }}"
+  template:
+    src: .rtorrent.rc
+    dest: /home/{{ admin_uname }}
+
+- name: Add rt.service systemd service
+  template:
+    src: rt.service
+    dest: /etc/systemd/user/rt.service
+  notify:
+    - reload systemd
+    - start rt.service
+    - enable rt.service
+    
+# - name: flush handlers
+#   meta: flush_handlers
