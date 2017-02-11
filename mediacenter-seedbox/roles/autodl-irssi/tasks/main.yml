@@ -35,15 +35,6 @@
     src: irssi.config
     dest: /home/{{ admin_uname }}/.irssi/config
       
-- name: Adding irssi systemd service
-  template:
-    src: irssi.service
-    dest: /etc/systemd/user/irssi.service
-  notify:
-    - reload systemd
-    - start irssi
-    - enable irssi
-
 - name: Copying autodl irssi installation script
   remote_user: "{{ admin_uname }}"
   template:

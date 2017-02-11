@@ -42,15 +42,4 @@
   template:
     src: .rtorrent.rc
     dest: /home/{{ admin_uname }}
-
-- name: Add rt.service systemd service
-  template:
-    src: rt.service
-    dest: /etc/systemd/user/rt.service
-  notify:
-    - reload systemd
-    - start rt.service
-    - enable rt.service
     
-# - name: flush handlers
-#   meta: flush_handlers
